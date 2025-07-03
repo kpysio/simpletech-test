@@ -1,8 +1,6 @@
 import { test, expect } from "@playwright/test";
 
 test("tenant user - can login ", async ({ page }) => {
-  await page.goto(process.env.BASE_URL || "https://hitarth.pw/labs/simpletech/");
-  await page.getByRole("textbox", { name: "Username" }).click();
   const username = process.env.TENANT1_USERNAME;
   if (!username) {
     throw new Error("TENANT1_USERNAME environment variable is not set");
@@ -11,6 +9,10 @@ test("tenant user - can login ", async ({ page }) => {
   if (!password) {
     throw new Error("TENANT1_PASSWORD environment variable is not set");
   }
+
+  await page.goto(process.env.BASE_URL || "https://google.com");
+  await page.getByRole("textbox", { name: "Username" }).click();
+
   await page.getByRole("textbox", { name: "Password" }).fill(password);
   await page.getByRole("textbox", { name: "Username" }).fill(username);
 

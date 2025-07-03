@@ -33,4 +33,9 @@ Visit https://playwright.dev/docs/intro for more information. ✨
 Happy hacking! 🎭
 
 - windows -> $env:ENV="dev"
-- npx playwright test tenant-login
+- npx playwright test system-login --project=chromium
+- npx playwright test system-tenant-create --project=chromium
+
+- npx playwright test tenant-login --project=chromium --debug
+- npx playwright test tenant-role-create --project=chromium
+- npx playwright test tenant-branch-create --project=chromium
