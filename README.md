@@ -39,3 +39,7 @@ Happy hacking! 🎭
 - npx playwright test tenant-login --project=chromium --debug
 - npx playwright test tenant-role-create --project=chromium
 - npx playwright test tenant-branch-create --project=chromium
+
+
+netstat -ano | findstr :9323
+taskkill /PID 27924 /F

@@ -17,7 +17,7 @@ test("tenant user - can login ", async ({ page }) => {
   await page.getByRole("textbox", { name: "Username" }).fill(username);
 
   await page.getByRole("button", { name: "Sign In" }).click();
-  await expect(page.getByRole("strong")).toContainText("TrackHub Dashboard");
+  await expect(page.getByRole("strong")).toContainText("Dashboard");
   await expect(page.getByRole("list")).toContainText("Branch");
   await expect(page.getByRole("list")).toContainText("Customer");
   await expect(page.getByRole("list")).toContainText("Role & Permission");

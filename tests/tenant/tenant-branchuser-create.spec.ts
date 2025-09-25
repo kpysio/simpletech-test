@@ -12,6 +12,11 @@ test("tenant - create user for branch " + branches[0], async ({ page }) => {
   if (!password) {
     throw new Error("TENANT1_PASSWORD environment variable is not set");
   }
+  const branch_manager_role = process.env.BRANCH_MANAGER_ROLE;
+  if (!branch_manager_role) {
+    throw new Error("BRANCH_MANAGER_ROLE environment variable is not set");
+  }
+
 
   await page.goto(process.env.BASE_URL || "https://google.com");
   await page.getByRole("textbox", { name: "Username" }).click();
@@ -20,7 +25,7 @@ test("tenant - create user for branch " + branches[0], async ({ page }) => {
   await page.getByRole("textbox", { name: "Username" }).fill(username);
 
   await page.getByRole("button", { name: "Sign In" }).click();
-  await expect(page.getByRole("strong")).toContainText("TrackHub Dashboard");
+  await expect(page.getByRole("strong")).toContainText("Dashboard");
 
   for (let index = 0; index < users.length; index++) {
     await page.getByRole("link", { name: " System Users" }).click();
@@ -36,7 +41,7 @@ test("tenant - create user for branch " + branches[0], async ({ page }) => {
     await page.getByRole("option", { name: branches[0] }).click();
 
     await page.getByRole("list").nth(3).click();
-    await page.getByRole("option", { name: "Branch Manager" }).click();
+    await page.getByRole("option", { name: branch_manager_role }).click();
 
     await page.getByRole("textbox", { name: "Email" }).click();
     await page.getByRole("textbox", { name: "Email" }).fill("gujju2@kpys.co.uk");

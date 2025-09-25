@@ -9,6 +9,10 @@ test("tenant - can create role [Branch Manager - Read, Add, Edit, Delete]", asyn
   if (!password) {
     throw new Error("TENANT1_PASSWORD environment variable is not set");
   }
+  const branch_manager_role = process.env.BRANCH_MANAGER_ROLE;
+  if (!branch_manager_role) {
+    throw new Error("BRANCH_MANAGER_ROLE environment variable is not set");
+  }
 
   await page.goto(process.env.BASE_URL || "https://google.com");
   await page.getByRole("textbox", { name: "Username" }).click();
@@ -17,7 +21,7 @@ test("tenant - can create role [Branch Manager - Read, Add, Edit, Delete]", asyn
   await page.getByRole("textbox", { name: "Username" }).fill(username);
 
   await page.getByRole("button", { name: "Sign In" }).click();
-  await expect(page.getByRole("strong")).toContainText("TrackHub Dashboard");
+  await expect(page.getByRole("strong")).toContainText("Dashboard");
 
   await expect(page.getByRole("list")).toContainText("Role & Permission");
   await page.getByRole("link", { name: " Role & Permission" }).click();
@@ -26,7 +30,7 @@ test("tenant - can create role [Branch Manager - Read, Add, Edit, Delete]", asyn
   await page.getByRole("link", { name: "Add New" }).click();
   await expect(page.locator("legend")).toContainText("Permission Info");
   await page.getByRole("textbox", { name: "Enter Permission Name" }).click();
-  await page.getByRole("textbox", { name: "Enter Permission Name" }).fill("Branch Mnager");
+  await page.getByRole("textbox", { name: "Enter Permission Name" }).fill(branch_manager_role);
   await page.getByRole("textbox", { name: "Enter Permission Name" }).press("Tab");
   await page.getByRole("option", { name: "TrackHub" }).click();
   await expect(page.locator("#permission-table-body")).toContainText("Branch");

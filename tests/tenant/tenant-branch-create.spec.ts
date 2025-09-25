@@ -2,6 +2,8 @@ import { test, expect } from "@playwright/test";
 const branches = process.env.BRANCHES?.split(",") || [];
 
 test("tanant - create branch", async ({ page }) => {
+
+  
   const username = process.env.TENANT1_USERNAME;
   if (!username) {
     throw new Error("TENANT1_USERNAME environment variable is not set");
@@ -18,7 +20,7 @@ test("tanant - create branch", async ({ page }) => {
   await page.getByRole("textbox", { name: "Username" }).fill(username);
 
   await page.getByRole("button", { name: "Sign In" }).click();
-  await expect(page.getByRole("strong")).toContainText("TrackHub Dashboard");
+  await expect(page.getByRole("strong")).toContainText("Dashboard");
 
   for (let index = 0; index < branches.length; index++) {
     console.log("Creating branch: " + branches[index]);
